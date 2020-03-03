@@ -6,6 +6,8 @@ typedef unsigned long long U64;
 #define NAME "Vice 1.0"
 #define BRD_SQ_NUM 120
 
+#define MAXGAMEMOVES 2048
+
 enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
 enum { FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H, FILE_NONE };
 enum { RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8, RANK_NONE };
@@ -24,6 +26,16 @@ enum {
 
 enum { FALSE, TRUE };
 
+enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8}; // Castling move
+
+typedef struct{
+    int move;
+    int castlePerm; // Castle permission
+    int enPas; // En passant square
+    int fiftyMove;
+    U64 posKey; 
+} S_UNDO; // before move was made
+
 typedef struct{
     int pieces[BRD_SQ_NUM];
     U64 pawns[3];
@@ -37,12 +49,16 @@ typedef struct{
     int ply; // how many half moves
     int hisPly; // how many half moves total
 
+    int castlePerm; // Castling move
+
     U64 posKey; // unique key for each position
 
     int pceNum[13]; // Number of pieces on the board
     int bigPce[3]; // anything that isn't a pawn and sorted by color
     int majPce[3]; // rooks and queens
     int minPce[3]; // bishop and knights
+
+    S_UNDO history[MAXGAMEMOVES]; // history of all moves
 
 } S_BOARD;
 
