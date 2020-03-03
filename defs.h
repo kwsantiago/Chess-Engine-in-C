@@ -5,7 +5,7 @@
 
 // This debugging definition is from the book "Beginning Programming in C++"
 // Very important for debugging
-#define DEBUG
+#define DEBUG // comment out if not needed
 
 #ifndef DEBUG
 #define ASSERT(n)
