@@ -4,10 +4,18 @@
 int main(){
     AllInIt();
 
-    int num = 2;
-    int nuts = 4;
+    U64 playBitBoard = 0ULL;
 
-    ASSERT(num==nuts);
+    printf("Start:\n\n");
+    PrintBitBoard(playBitBoard);
+
+    playBitBoard |= (1ULL << SQ64(D2));
+    printf("D2 Added:\n\n");
+    PrintBitBoard(playBitBoard);
+
+    playBitBoard |= (1ULL << SQ64(G2));
+    printf("G2 Added:\n\n");
+    PrintBitBoard(playBitBoard);
 
     return 0;
 }
